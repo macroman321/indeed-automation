@@ -1,0 +1,10 @@
+{
+  "LOCAL": {
+    "protocol": "http",
+    "baseHostPostfix": "localhost",
+  },
+  "PROD": {
+    "protocol": "https",
+    "baseHostPostfix": "https://indeed.com"
+  }
+}

@@ -1,0 +1,73 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id "io.freefair.lombok" version "4.1.6"
+}
+
+repositories {
+    mavenLocal()
+    maven { url = 'http://dl.bintray.com/epam/reportportal' }
+    maven { url = 'http://repo.maven.apache.org/maven2' }
+}
+
+dependencies {
+    compile 'org.projectlombok:lombok:1.18.10'
+    annotationProcessor 'org.projectlombok:lombok:1.18.10'
+    compile 'org.immutables:builder:2.5.6'
+    annotationProcessor 'org.immutables:builder:2.5.6'
+    compile 'org.immutables:value-annotations:2.7.5'
+    annotationProcessor 'org.immutables:value-annotations:2.7.5'
+    compile 'org.immutables:value:2.5.6'
+    annotationProcessor 'org.immutables:value:2.5.6'
+    compile 'joda-time:joda-time:2.10.3'
+    compile 'org.seleniumhq.selenium:selenium-java:3.141.59'
+    compile 'org.seleniumhq.selenium:htmlunit-driver:2.35.1'
+    compile 'org.apache.logging.log4j:log4j-api:2.9.1'
+    compile 'org.apache.logging.log4j:log4j-core:2.9.1'
+    compile 'com.squareup.okhttp3:okhttp:3.14.4'
+    compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.9.4'
+    compile 'com.squareup.retrofit2:retrofit:2.5.0'
+    compile 'com.squareup.retrofit2:converter-jackson:2.5.0'
+    compile 'org.mockito:mockito-core:2.23.4'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.14.4'
+    compile 'commons-io:commons-io:2.6'
+    compile 'org.postgresql:postgresql:42.2.5'
+    compile 'commons-codec:commons-codec:1.11'
+    compile 'org.json:json:20140107'
+    compile 'org.testng:testng:6.14.3'
+    testCompile 'org.testng:testng:6.14.3'
+}
+
+group = 'cloud.united.core.qa'
+version = '1.0'
+sourceCompatibility = '8'
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+        }
+
+        resources {
+            srcDir 'src/main/resources'
+        }
+    }
+    test {
+        java {
+            srcDir 'src/test/java'
+        }
+
+        resources {
+            srcDir 'src/test/resources'
+        }
+    }
+}
+
+task mandarina(type: Test) {
+    useTestNG() {
+        systemProperty "environment.configuration.file", System.getProperty("environment.configuration.file")
+        systemProperty "env", System.getProperty("env")
+        systemProperty "suiteName", System.getProperty("suiteName")
+        suites 'src/test/resources/suites/' + System.getProperty("suiteName") + '.xml'
+    }
+}

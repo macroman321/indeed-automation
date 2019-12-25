@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Indeed application automation" verbose="10" annotations="JDK" thread-count="4" parallel="classes">
+
+
+    <test name="Apply test" preserve-order="true">
+        <classes>
+            <class name="indeed.ApplyTest"/>
+        </classes>
+    </test>
+
+</suite>

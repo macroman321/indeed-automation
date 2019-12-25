@@ -1,0 +1,17 @@
+{
+  "STAGING": {
+    "hostUrl": "jdbc:postgresql://sql-nvg.united.cloud:5432/",
+    "dbuser": "mandarina_admin",
+    "dbpass": "pezahsh9Jey8op6ac6hiedeiKa3dieki"
+  },
+  "INT": {
+    "hostUrl": "jdbc:postgresql://tmsi-lj-br-sql-1-qa.ug-qa.cdn.united.cloud:5432/",
+    "dbuser": "vodloadtester",
+    "dbpass": "eGvQ7TXaYWhT7vWJHDnY"
+  },
+  "PROD": {
+    "hostUrl": "jdbc:postgresql://sql-nvg.united.cloud:5432/",
+    "dbuser": "mandarina_admin",
+    "dbpass": "pezahsh9Jey8op6ac6hiedeiKa3dieki"
+  }
+}

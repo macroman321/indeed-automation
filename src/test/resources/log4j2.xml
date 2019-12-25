@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+
+    <Appenders>
+        <Console name="ConsoleAppender" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss,SSS}] [%t] %p (%F:%L) - %m%n"/>
+        </Console>
+
+        <RollingFile name="RollingFile" fileName="logs/taf-log.log"
+                     filePattern="logs/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss,SSS}] [%t] %p (%F:%L) - %m%n"/>
+            <Policies>
+                <OnStartupTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="20 MB"/>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+            <DefaultRolloverStrategy compressionLevel="0" max="5"/>
+        </RollingFile>
+        <Routing name="Routing">
+            <Routes pattern="$${ctx:ROUTINGKEY}">
+                <Route>
+                    <RollingFile
+                            name="taf-log-${ctx:ROUTINGKEY}"
+                            fileName="logs/taf-log-${ctx:ROUTINGKEY}.log"
+                            filePattern="./logs/${date:yyyy-MM}/taf-log${ctx:ROUTINGKEY}-%d{yyyy-MM-dd}-%i.log.gz">
+                        <PatternLayout>
+                            <pattern>[%d{yyyy-MM-dd HH:mm:ss,SSS}] [%t] %p (%F:%L) - %m%n</pattern>
+                        </PatternLayout>
+                        <Policies>
+                            <TimeBasedTriggeringPolicy interval="6" modulate="true"/>
+                            <SizeBasedTriggeringPolicy size="20 MB"/>
+                        </Policies>
+                    </RollingFile>
+                </Route>
+            </Routes>
+        </Routing>
+        <ReportPortalLog4j2Appender name="ReportPortalAppender">
+            <PatternLayout pattern="[%d{HH:mm:ss}] %-5p (%F) - %m%n"/>
+        </ReportPortalLog4j2Appender>
+    </Appenders>
+    <Loggers>
+        <Root level="debug">
+            <AppenderRef ref="RollingFile" level="debug"/>
+            <AppenderRef ref="ConsoleAppender" level="debug"/>
+        </Root>
+        <Logger name="cloud.united" level="debug" additivity="false">
+            <AppenderRef ref="RollingFile" level="debug"/>
+            <AppenderRef ref="ConsoleAppender" level="debug"/>
+            <AppenderRef ref="ReportPortalAppender" level="debug"/>
+        </Logger>
+    </Loggers>
+</Configuration>
