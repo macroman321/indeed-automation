@@ -88,7 +88,13 @@ public class SearchPage {
                         this.applyBtn.click();
                         Thread.sleep(2000);
                         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", this.continueBtn);
-                        this.continueBtn.click();
+                        Thread.sleep(500);
+                        if(this.continueBtn.isDisplayed()){
+                            this.continueBtn.click();
+                        } else {
+                            this.driver.close();
+                        }
+
                         Thread.sleep(500);
                         if (this.finalApplyBtn.isDisplayed()) {
                             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", this.finalApplyBtn);
