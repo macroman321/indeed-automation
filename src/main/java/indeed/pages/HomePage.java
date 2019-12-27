@@ -30,11 +30,8 @@ public class HomePage {
         this.driver = driver;
 
         EnvConfigurationSection envConfiguration = (EnvConfigurationSection) context.getAttribute("env");
-        String craftedUrl = new StringBuilder()
-                .append(envConfiguration.getProtocol()).append("://")
-                .append(envConfiguration.getBaseHostPostfix())
-                .toString();
-        this.driver.get(craftedUrl + endpoint);
+
+        this.driver.get("https://indeed.com");
         PageFactory.initElements(driver, this);
     }
 

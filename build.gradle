@@ -63,7 +63,7 @@ sourceSets {
     }
 }
 
-task mandarina(type: Test) {
+task apply(type: Test) {
     useTestNG() {
         systemProperty "environment.configuration.file", System.getProperty("environment.configuration.file")
         systemProperty "env", System.getProperty("env")

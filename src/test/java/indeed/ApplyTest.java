@@ -1,7 +1,9 @@
 package indeed;
 
-import indeed.pages.HomePage;
+import indeed.pages.LoginPage;
+import indeed.pages.SearchPage;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
@@ -18,11 +20,13 @@ public class ApplyTest {
         this.context = context;
     }
 
-    @Test()
-    public void applyToPositions(){
-
-        HomePage homePage = new HomePage(this.driver,this.context);
-        homePage.searchJobs("junior software engineer", "New York");
+    @Test(description = "applying to position automation")
+    public void applyToPositions() throws Exception {
+        LoginPage loginPage = new LoginPage(this.driver);
+        loginPage.login("accemail321@gmail.com","onelove1");
+        Thread.sleep(1000);
+        SearchPage homePage = new SearchPage(this.driver);
+        homePage.advanceSearch("security","new york");
 
     }
 
